@@ -44,11 +44,13 @@ li {
 }
 
 button {
-    ont-family: Arial, Helvetica, sans-serif;
-    font-size: 3vh;
-    display: inline;
-    margin-left: 1em;
-    margin-top: 3px;
+  ont-family: Arial, Helvetica, sans-serif;
+  font-size: 3vh;
+  display: inline-block;
+  background-color: lightblue;
+  height: 4vh;
+  margin-left: 1em;
+  margin-top: 3px;
 }
 
 #panel {
