@@ -95,13 +95,25 @@ class Canvas extends React.Component{
       l = edges.length;
       
       for (let i = 0;i<l;i++){
+        const edge = edges[i];
         // change to closet distance that's <= 15
-        if (lineDistance(x,y,...edges[i]) <= 15){
-          this.setState({current: edges[i]});
+        if (lineDistance(x,y,...edge) <= 15){
+          
+          // ensure clicked point is within two ends of visible line
+          const minX = Math.min(edge[0],edge[2]);
+          const maxX = Math.max(edge[0],edge[2]);
+          const minY = Math.min(edge[1],edge[3]);
+          const maxY = Math.max(edge[1],edge[3]);
+          
+          if (x < minX || x > maxX || y < minY || y > maxY){
+            // point clicked is not within two ends of visible line
+            continue;
+          }
+          
+          this.setState({current: edge});
           return;
         }
       }
-      
     }
     
     else if (this.state.mode === 'node'){
