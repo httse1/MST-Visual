@@ -93,11 +93,13 @@ class Canvas extends React.Component{
       // if node is not selected, find out selected line if exists
       const edges = this.state.edges;
       l = edges.length;
+      let closestE = null; // closest edge
+      let dist = 15; // current dist between point and closestE
       
       for (let i = 0;i<l;i++){
         const edge = edges[i];
-        // change to closet distance that's <= 15
-        if (lineDistance(x,y,...edge) <= 15){
+        // closet distance that's <= 15
+        if (lineDistance(x,y,...edge) <= dist){
           
           // ensure clicked point is within two ends of visible line
           const minX = Math.min(edge[0],edge[2]);
@@ -110,9 +112,10 @@ class Canvas extends React.Component{
             continue;
           }
           
-          this.setState({current: edge});
-          return;
+          dist = lineDistance(x,y,...edge);
+          closestE = edge;
         }
+        this.setState({current: closestE});
       }
     }
     
